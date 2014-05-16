@@ -1,0 +1,19 @@
+.icon-bear {
+	background-image: url('png/bear.png');
+	background-repeat: no-repeat;
+}
+
+.icon-bear-2 {
+	background-image: url('png/bear-2.png');
+	background-repeat: no-repeat;
+}
+
+.icon-search {
+	background-image: url('png/search.png');
+	background-repeat: no-repeat;
+}
+
+.icon-star {
+	background-image: url('png/star.png');
+	background-repeat: no-repeat;
+}

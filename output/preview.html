@@ -1,0 +1,112 @@
+<!doctype HTML>
+<html>
+	<head>
+		<title>Icons Preview!</title>
+		<style>
+			body {
+				background-image: linear-gradient(#eee 25%, transparent 25%, transparent), linear-gradient(#eee 25%, transparent 25%, transparent), linear-gradient(transparent 75%, #eee 75%), linear-gradient(transparent 75%, #eee 75%);
+				width: 100%;
+				background-size: 10px 10px;
+			}
+		</style>
+		<script>
+			/* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
+			window.grunticon = function( urls ){
+				// expects a urls array with 3 items representing CSS paths to datasvg, datapng, urlpng
+				if( !urls || urls.length !== 3 ){
+					return;
+				}
+
+
+
+				// Thanks Modernizr & Erik Dahlstrom
+				var w = window,
+					svg = !!w.document.createElementNS && !!w.document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect && !!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1") && !(window.opera && navigator.userAgent.indexOf('Chrome') === -1),
+					ajax = function( url, callback ){
+						var xmlhttp = new XMLHttpRequest();
+						xmlhttp.onreadystatechange=function(){
+							if ( xmlhttp.readyState==4 && xmlhttp.status==200 ){
+								callback( xmlhttp.responseText );
+							}
+						};
+						xmlhttp.open( "GET", url, true );
+						xmlhttp.send();
+					},
+					loadSVG = function(){
+						var wrap = w.document.createElement( "div" );
+						ajax( urls[ 0 ], function( text ){
+							wrap.innerHTML = text;
+							var svg =  wrap.firstChild;
+							svg.style.cssText = "position: absolute; left: -99999px; top: -99999px; clip: rect(0,0,0,0);";
+							w.document.documentElement.insertBefore( wrap.firstChild, w.document.documentElement.firstChild );
+						} );
+					},
+					loadCSS = function( data ){
+						var link = w.document.createElement( "link" ),
+							ref = w.document.getElementsByTagName( "script" )[ 0 ];
+						link.rel = "stylesheet";
+						link.href = urls[ data ? 1 : 2 ];
+						ref.parentNode.insertBefore( link, ref );
+					};
+
+					if( !svg ){
+						loadSVG();
+					}
+					else {
+
+						// shim svg so it can be styled with a background image in IE
+						document.createElement( "svg" );
+
+						// Thanks Modernizr
+						var img = new w.Image();
+
+						img.onerror = function(){
+							loadCSS( false );
+						};
+
+						img.onload = function(){
+							loadCSS( img.width === 1 && img.height === 1 );
+						};
+
+						img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+					}
+			};
+			// Call grunticon() here to load CSS:
+			grunticon(["icons.svg", "icons.data.png.css", "icons.fallback.css"]);
+		</script>
+	<noscript><link href="icons.fallback.css" rel="stylesheet"></noscript>
+	</head>
+	<body>
+		<h1>CUSTOM PREVIEW - you can change this in the previewTemplate option</h1>
+
+
+			<pre><code>.icon-bear:</code></pre>
+			<svg class="icon-bear" style="width: 100px; height: 62.905px;" ><use xlink:href="#icon-bear"></svg>
+			<hr/>
+
+			<pre><code>.icon-bear: colored with css</code></pre>
+			<style>
+				.icon-bear-2 {
+					fill: #aa0000;
+				}
+			</style>
+			<svg class="icon-bear icon-bear-2" style="width: 100px; height: 62.905px;" ><use xlink:href="#icon-bear"></svg>
+			<hr/>
+
+
+
+			<pre><code>.icon-search:</code></pre>
+			<svg class="icon-search" style="width: 15.779px; height: 16.482px;"><use xlink:href="#icon-search"></svg>
+			<hr/>
+
+
+
+			<pre><code>.icon-star:</code></pre>
+			<svg class="icon-star"style="width: 42px; height: 42px;" ><use xlink:href="#icon-star"></svg>
+			<hr/>
+
+
+
+
+</body>
+</html>
